@@ -141,7 +141,7 @@ export default function MainDrawer(props) {
                     <Typography>
                         <List>
                             <ListItem key="apiMetric" disablePadding>
-                                <ListItemButton onClick={null}>
+                                <ListItemButton onClick={handleLayoutChange}>
                                     <ListItemIcon>
                                         <Reorder/>
                                     </ListItemIcon>
