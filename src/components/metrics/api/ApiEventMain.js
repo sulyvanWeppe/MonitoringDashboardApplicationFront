@@ -1,17 +1,29 @@
 import Typography from '@mui/material/Typography';
 import axios from "axios";
+import { useState, useEffect, useLayoutEffect } from 'react';
 
 export default function ApiEventMain() {
-    axios.get("http://localhost:8081/ping")
-    .then(response => {
-        console.log(response);
-        console.log(response.data);
-    })
-    .catch(err => alert("error"));
+    const [apiMetrics, setApiMetrics] = useState();
+
+    var apiMetricsDisplay;
+    useEffect(() => {
+        axios.get("http://localhost:8081/apiMetrics")
+            .then(response => {
+                setApiMetrics(response.data);
+                apiMetricsDisplay = apiMetrics.map(apiMetric => <li key={apiMetric.metricId}>
+                    toto
+                </li>);
+                apiMetricsDisplay = "TOTO";
+            })
+            .catch(err => alert("An error occured while trying to retrieve metrics"));
+        }
+    );
+
+
 
     return (
         <div>
-            <Typography>This is a test</Typography>
+            <Typography><ul>{apiMetricsDisplay}toto</ul></Typography>
         </div>
     );
 }
