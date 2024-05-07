@@ -6,7 +6,7 @@ import MetricDataGrid from '../MetricDataGrid';
 
 export default function ApiEventMain() {
     const [apiMetrics, setApiMetrics] = useState([]);
-    const initialFilter = {callerServerNames: ["toto"], methods: [], uris: []};
+    const initialFilter = {callerServerNames: [], methods: [], uris: []};
     const [filter, setFilter] = useState(initialFilter);
 
     useEffect(() => {
@@ -17,7 +17,7 @@ export default function ApiEventMain() {
                     uris: filter.uris
                 };
 
-                axios.get("http://localhost:8081/apiMetrics",{params: request})
+                axios.post("http://localhost:8081/apiMetrics/lookup",request)
                 .then(response => {
                     console.log(response);
                     setApiMetrics(response.data);
