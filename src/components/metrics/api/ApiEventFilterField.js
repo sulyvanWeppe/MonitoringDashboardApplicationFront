@@ -22,25 +22,27 @@ function getStyles(value, filterValue, theme) {
     };
 }
 
-export default function ApiEventFilterField({filterName, filterValues, handleFilterChange}) {
-
+export default function ApiEventFilterField({ filterName, filterValues, handleFilterChange }) {
+  console.log("rendering");
     const theme = useTheme();
     const [filterValue, setFilterValue] = useState([]);
     const [possibleValues, setPossibleValues] = useState(filterValues);
 
-    const handleChange = (event) => {
-        const {
-          target: { value },
-        } = event;
-
+    /*const handleChange = (event) => {
+        event.stopPropagation();
         //Set local value
         setFilterValue(
           // On autofill we get a stringified value.
-          typeof value === 'string' ? value.split(',') : value,
+          //typeof event.target.value === 'string' ? event.target.value.split(',') : event.target.value
+          filterValue ? [...filterValue,'toto'] : ['toto']
         );
 
-        handleFilterChange(filterValue);
-      };
+        console.log("filter value is "+event.target.value);
+        console.log(filterValue);
+
+        console.log("call to higher level");
+        handleFilterChange(event);
+      };*/
 
     //Rendering
     return(
@@ -52,7 +54,7 @@ export default function ApiEventFilterField({filterName, filterValues, handleFil
                     id="filter-field"
                     multiple
                     value={filterValue}
-                    onChange={handleChange}
+                    onChange={handleFilterChange}
                     input={<OutlinedInput id="select-multiple-filter" label="Chip"/>}
                     renderValue={(selected) => (
                         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5}}>

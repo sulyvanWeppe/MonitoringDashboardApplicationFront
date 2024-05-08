@@ -3,26 +3,17 @@ import { useState, useEffect } from 'react';
 import { Divider, Grid, Paper } from "@mui/material";
 import ApiEventFilterField from './ApiEventFilterField';
 
-const values = [
-    'value1','value2','value3'
-]
 
-export default function ApiEventFilter({handleChange}) {
 
-    function handleCallerServerNameChange(newCallerServerNameValue) {
-        handleChange(newCallerServerNameValue,null,null);
-    }
 
-    function handleMethodChange(newMethodValue) {
-        handleChange(null,newMethodValue,null);
-    }
-
-    function handleUriChange(newUriValue) {
-        handleChange(null,null,newUriValue);
-    }
+export default function ApiEventFilter({ handleCallerServerNameChange, handleMethodChange, handleUriChange }) {
+handleMethodChange= handleMethodChange.bind(this);
+    const values = [
+        'value1','value2','value3'
+    ]
 
     return (
-        <>
+        <div>
             <Paper sx={{margin: 'auto', marginLeft: '2%', marginRight:'2%', marginBottom:'2%'}} elevation={6}>
                 <Grid container spacing={2} direction="row" alignItems="center" sx={{maxWidth: '100%'}}>
                     <Grid item xs={4}>
@@ -36,6 +27,6 @@ export default function ApiEventFilter({handleChange}) {
                     </Grid>
                 </Grid>
             </Paper>
-        </>
+        </div>
     )
 }
