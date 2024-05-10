@@ -23,28 +23,31 @@ function getStyles(value, filterValue, theme) {
 }
 
 export default function ApiEventFilterField({ filterName, filterValues, handleFilterChange }) {
-  console.log("rendering");
-    const theme = useTheme();
+    /**
+     * State
+     */
     const [filterValue, setFilterValue] = useState([]);
     const [possibleValues, setPossibleValues] = useState(filterValues);
 
-    /*const handleChange = (event) => {
-        event.stopPropagation();
-        //Set local value
+    /**
+     * Theme
+     */
+    const theme = useTheme();
+
+    /**
+     * Auxilary Methods
+     */
+      const handleChange = (event) => {
         setFilterValue(
-          // On autofill we get a stringified value.
-          //typeof event.target.value === 'string' ? event.target.value.split(',') : event.target.value
-          filterValue ? [...filterValue,'toto'] : ['toto']
+          typeof event.target.value==='string' ? event.target.value.split(',') : event.target.value
         );
 
-        console.log("filter value is "+event.target.value);
-        console.log(filterValue);
-
-        console.log("call to higher level");
         handleFilterChange(event);
-      };*/
-
-    //Rendering
+      };
+    
+    /**
+     * Rendering
+     */
     return(
         <div>
             <FormControl sx={{ m: 1}} fullWidth>
@@ -54,7 +57,7 @@ export default function ApiEventFilterField({ filterName, filterValues, handleFi
                     id="filter-field"
                     multiple
                     value={filterValue}
-                    onChange={handleFilterChange}
+                    onChange={handleChange}
                     input={<OutlinedInput id="select-multiple-filter" label="Chip"/>}
                     renderValue={(selected) => (
                         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5}}>

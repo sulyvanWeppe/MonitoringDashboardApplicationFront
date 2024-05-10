@@ -5,35 +5,20 @@ import ApiEventFilter from './ApiEventFilter';
 import MetricDataGrid from '../MetricDataGrid';
 
 export default function ApiEventMain() {
-    //State
+    /**
+     * State
+     */
     const [apiMetrics, setApiMetrics] = useState([]);
     const [callerServerNameFilter,setCallerServerNameFilter] = useState([]);
     const [methodFilter,setMethodFilter] = useState([]);
     const [uriFilter,setUriFilter] = useState([]);
 
+    /**
+     * Effect
+     */
     let requestInterval;
-    /*useEffect(() => {
-        requestInterval = setInterval(() => {
-                var request = {
-                    callerServerNames: callerServerNameFilter,
-                    methods: methodFilter,
-                    uris: uriFilter
-                };
 
-                //console.log(request);
-
-                axios.post("http://localhost:8081/apiMetrics/lookup",request)
-                .then(response => {
-                    //onsole.log(response);
-                    setApiMetrics(response.data);
-                })
-                .catch(err => alert("An error occured while trying to retrieve metrics"));
-            
-        },500);
-    }, []);
-
-    useEffect(() => {
-        console.log("change detected in filter");
+    useEffect(() => {       
         requestInterval = setInterval(() => {
             var request = {
                 callerServerNames: callerServerNameFilter,
@@ -41,23 +26,22 @@ export default function ApiEventMain() {
                 uris: uriFilter
             };
 
-            //console.log(request);
-
             axios.post("http://localhost:8081/apiMetrics/lookup",request)
             .then(response => {
-                //onsole.log(response);
                 setApiMetrics(response.data);
             })
             .catch(err => alert("An error occured while trying to retrieve metrics"));
         
-    },500);
-    }, [callerServerNameFilter,methodFilter,uriFilter])*/
+        },1000);
+        
+        // Cleanup function to clear interval when component unmounts or when selectedValue changes
+        return () => clearInterval(requestInterval);
 
-    useEffect(() => {
-        console.log("titi")
-        console.log(methodFilter);
-    },[methodFilter])
+    }, [callerServerNameFilter,methodFilter,uriFilter])
 
+    /**
+     * Auxilary Methods
+     */
     const apiMetricsData = () => {
         if(apiMetrics) {
             return apiMetrics.map((apiMetric) => (
@@ -77,21 +61,21 @@ export default function ApiEventMain() {
         return [];
     }
 
-    function handleCallerServerNameFilterChange(newCallerServerName) {
-        setCallerServerNameFilter([]);
+    function handleCallerServerNameFilterChange(e) {
+        setCallerServerNameFilter(e.target.value);
     }
 
     function handleMethodFilterChange(e) {
-        console.log(e.target.value);
         setMethodFilter(e.target.value);
-        console.log("toto");
-        console.log(methodFilter);
     }
 
-    function handleUriFilterChange(newUri) {
-        //TODO
+    function handleUriFilterChange(e) {
+        setUriFilter(e.target.value);
     }
 
+    /**
+     * Rendering
+     */
     return (
         <>
             <ApiEventFilter handleCallerServerNameChange={handleCallerServerNameFilterChange}

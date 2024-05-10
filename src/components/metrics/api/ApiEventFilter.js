@@ -7,23 +7,26 @@ import ApiEventFilterField from './ApiEventFilterField';
 
 
 export default function ApiEventFilter({ handleCallerServerNameChange, handleMethodChange, handleUriChange }) {
-handleMethodChange= handleMethodChange.bind(this);
-    const values = [
-        'value1','value2','value3'
-    ]
+    const callerServerNameValues = ['localhost'];
+    const methodValues = ['POST','DELETE','GET','PUT'];
+    const uriValues = ['/ping'];
 
+
+    /**
+     * Rendering
+     */
     return (
         <div>
             <Paper sx={{margin: 'auto', marginLeft: '2%', marginRight:'2%', marginBottom:'2%'}} elevation={6}>
                 <Grid container spacing={2} direction="row" alignItems="center" sx={{maxWidth: '100%'}}>
                     <Grid item xs={4}>
-                        <ApiEventFilterField filterName="Caller Server Name" filterValues={values} handleFilterChange={handleCallerServerNameChange}/>
+                        <ApiEventFilterField filterName="Caller Server Name" filterValues={callerServerNameValues} handleFilterChange={handleCallerServerNameChange}/>
                     </Grid>
                     <Grid item xs={4}>
-                        <ApiEventFilterField filterName="Method" filterValues={values} handleFilterChange={handleMethodChange}/>
+                        <ApiEventFilterField filterName="Method" filterValues={methodValues} handleFilterChange={handleMethodChange}/>
                     </Grid>
                     <Grid item xs={4}>
-                        <ApiEventFilterField filterName="URI" filterValues={values} handleFilterChange={handleUriChange}/>
+                        <ApiEventFilterField filterName="URI" filterValues={uriValues} handleFilterChange={handleUriChange}/>
                     </Grid>
                 </Grid>
             </Paper>
