@@ -2,7 +2,7 @@ import Typography from '@mui/material/Typography';
 import axios from "axios";
 import { useState, useEffect } from 'react';
 import ApiEventFilter from './ApiEventFilter';
-import MetricDataGrid from '../MetricDataGrid';
+import ApiDataGrid from './ApiDataGrid';
 
 export default function ApiEventMain() {
     /**
@@ -81,7 +81,7 @@ export default function ApiEventMain() {
             <ApiEventFilter handleCallerServerNameChange={handleCallerServerNameFilterChange}
                 handleMethodChange={handleMethodFilterChange}
                 handleUriChange={handleUriFilterChange}/>
-            <MetricDataGrid data={apiMetricsData()}/>
+            <ApiDataGrid data={apiMetricsData()}/>
         </>
     );
 }

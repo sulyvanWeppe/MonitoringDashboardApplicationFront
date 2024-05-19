@@ -16,7 +16,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Home, HomeMax, Reorder } from '@mui/icons-material';
+import { BarChart, Home, HomeMax, LegendToggle, Reorder } from '@mui/icons-material';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -133,23 +133,28 @@ export default function MainDrawer(props) {
           </ListItem>
           <Divider />
             <Accordion>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon/>}>
-                    <Typography>Metrics</Typography>
+                <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
+                    <Typography> API Metrics</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography>
-                        <List>
-                            <ListItem key="apiMetric" disablePadding>
-                                <ListItemButton onClick={handleLayoutChange}>
-                                    <ListItemIcon>
-                                        <Reorder/>
-                                    </ListItemIcon>
-                                    <ListItemText primary="API"/>
-                                </ListItemButton>
-                            </ListItem>
-                        </List>
-                    </Typography>
+                  <List>
+                    <ListItem>
+                        <ListItemButton onClick={handleLayoutChange}>
+                            <ListItemIcon>
+                                <LegendToggle/>
+                            </ListItemIcon>
+                            <ListItemText primary="Live Monitoring"/>
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem>
+                        <ListItemButton onClick={handleLayoutChange}>
+                            <ListItemIcon>
+                                <BarChart/>
+                            </ListItemIcon>
+                            <ListItemText primary="Statistics"/>
+                        </ListItemButton>
+                    </ListItem>
+                  </List>
                 </AccordionDetails>
             </Accordion>
         </List>

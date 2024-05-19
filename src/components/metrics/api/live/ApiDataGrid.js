@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import React from "react";
 import { DataGrid } from '@mui/x-data-grid';
 
-export default function MetricDataGrid({data}) {
+export default function ApiDataGrid({data}) {
     const columns = [
         {field: 'id', headerName: 'ID', width:100, minWidth:100, maxWidth: 400},
         {field: 'timestamp', headerName: 'TIMESTAMP', width:250, minWidth:100, maxWidth: 400},
