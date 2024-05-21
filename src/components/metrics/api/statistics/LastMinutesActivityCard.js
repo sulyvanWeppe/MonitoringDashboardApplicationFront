@@ -8,7 +8,7 @@ export default function LastMinutesActivityCard() {
      */
     return(
         <>
-            <Card sx={{ margin:'auto', width:'96%'}}>
+            <Card sx={{ margin:'auto' }}>
                 <CardContent>
                     <Typography color="text.secondary" textAlign="right">Activity of the last 10 minutes</Typography>
                     <LastMinutesActivityChart/>
