@@ -7,11 +7,17 @@ import NrCallsInPeriodCard from './NrCallsInPeriodCard';
 
 export default function ApiStatMain() {
     const [statistics,setStatistics] = useState(null);
-console.log("rendering");
+    
     /**
      * Effect
      */
     useEffect(() => {
+        //First execution/request
+        axios.get("http://localhost:8081/statistics")
+        .then(response => {setStatistics(response.data)})
+        .catch(err => alert("An error occured while trying to retrieve statistics"));
+
+        //Excutions/requests following the set interval
         setInterval(()=> {
             axios.get("http://localhost:8081/statistics")
             .then(response => {setStatistics(response.data)})
