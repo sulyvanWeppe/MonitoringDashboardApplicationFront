@@ -6,6 +6,7 @@ export default function LastMinutesActivityChart({activityData}) {
      * Rendering
      */
     const dataToDisplay = activityData ? activityData : [0,0,0,0,0,0,0,0,0,0];
+    console.log(dataToDisplay);
     return (
         <>
             <LineChart

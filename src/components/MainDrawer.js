@@ -16,7 +16,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { BarChart, Home, HomeMax, LegendToggle, Reorder } from '@mui/icons-material';
+import { BarChart, Home, HomeMax, LegendToggle, Reorder, Notifications } from '@mui/icons-material';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -157,6 +157,16 @@ export default function MainDrawer(props) {
                   </List>
                 </AccordionDetails>
             </Accordion>
+            <Divider/>
+            <ListItem key="alert" disablePadding>
+              <ListItemButton onClick={handleLayoutChange}>
+                <ListItemIcon>
+                  <Notifications/>
+                </ListItemIcon>
+                <ListItemText primary="Alert"/>
+              </ListItemButton>
+            </ListItem>
+            <Divider/>
         </List>
       </Drawer>
       <Main open={open}>
