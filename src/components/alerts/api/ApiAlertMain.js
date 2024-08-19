@@ -1,14 +1,13 @@
 import Typography from '@mui/material/Typography';
 import axios from "axios";
 import { useState, useEffect } from 'react';
-import ApiEventFilter from './ApiEventFilter';
-import ApiDataGrid from './ApiDataGrid';
+import ApiFilter from '../../common/ApiFilter';
 
 export default function ApiAlertMain() {
     /**
      * State
      */
-    const [apiMetrics, setApiMetrics] = useState([]);
+    const [alerts, setAlerts] = useState([]);
     const [hostFilter,setHostFilter] = useState([]);
     const [portFilter,setPortFilter] = useState([]);
     const [methodFilter,setMethodFilter] = useState([]);
@@ -30,32 +29,33 @@ export default function ApiAlertMain() {
 
             axios.post("http://localhost:8081/alerts/lookup",request)
             .then(response => {
-                setApiMetrics(response.data);
+                setAlerts(response.data);
             })
-            .catch(err => alert("An error occured while trying to retrieve metrics"));
+            .catch(err => alert("An error occured while trying to retrieve alerts"));
         
         },1000);
         
         // Cleanup function to clear interval when component unmounts or when selectedValue changes
         return () => clearInterval(requestInterval);
 
-    }, [callerServerNameFilter,methodFilter,uriFilter])
+    }, [hostFilter,portFilter,methodFilter,uriFilter])
 
     /**
      * Auxilary Methods
      */
-    const apiMetricsData = () => {
-        if(apiMetrics) {
-            return apiMetrics.map((apiMetric) => (
+    const alertsData = () => {
+        if(alerts) {
+            return alerts.map((alert) => (
                 {
-                    id: apiMetric.metricId,
-                    timestamp: apiMetric.timestamp,
-                    callerServerName: apiMetric.callerServerName,
-                    callerServerPort: apiMetric.callerServerPort,
-                    method: apiMetric.method,
-                    requestUri: apiMetric.requestUri,
-                    requestPayload: apiMetric.requestPayload,
-                    responsePayload: apiMetric.responsePayload
+                    id: alert.id,
+                    timestampCreation: alert.timestampCreation,
+                    timestampLastUpdate: alert.timestampLastUpdate,
+                    duration: alert.duration,
+                    threshold: alert.threshold,
+                    host: alert.host,
+                    port: alert.port,
+                    uri: alert.uri,
+                    method: alert.method
                 }
             ))
         }
@@ -63,8 +63,12 @@ export default function ApiAlertMain() {
         return [];
     }
 
-    function handleCallerServerNameFilterChange(e) {
-        setCallerServerNameFilter(e.target.value);
+    function handleHostFilterChange(e) {
+        setHostFilter(e.target.value);
+    }
+
+    function handlePortFilterChange(e) {
+        setPortFilter(e.target.value);
     }
 
     function handleMethodFilterChange(e) {
@@ -80,10 +84,10 @@ export default function ApiAlertMain() {
      */
     return (
         <>
-            <ApiEventFilter handleCallerServerNameChange={handleCallerServerNameFilterChange}
+            <ApiFilter handleHostChange={handleHostFilterChange}
+                handlePortChange={handlePortFilterChange}
                 handleMethodChange={handleMethodFilterChange}
                 handleUriChange={handleUriFilterChange}/>
-            <ApiDataGrid data={apiMetricsData()}/>
         </>
     );
 }

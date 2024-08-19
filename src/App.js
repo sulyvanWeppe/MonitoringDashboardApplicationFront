@@ -4,6 +4,7 @@ import './App.css';
 import MainDrawer from './components/MainDrawer';
 import ApiEventMain from './components/metrics/api/live/ApiEventMain';
 import ApiStatMain from './components/metrics/api/statistics/ApiStatMain';
+import ApiAlertMain from './components/alerts/api/ApiAlertMain';
 
 function App() {
   //State info
@@ -26,8 +27,10 @@ function App() {
       currentPanel=<ApiEventMain/>
       break;
     case "Statistics":
-        currentPanel=<ApiStatMain/>
-        break;
+      currentPanel=<ApiStatMain/>
+      break;
+    case "Alerts":
+      currentPanel=<ApiAlertMain/>
     default:
       break;
   }

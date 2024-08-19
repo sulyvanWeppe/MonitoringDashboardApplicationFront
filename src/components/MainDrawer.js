@@ -158,12 +158,12 @@ export default function MainDrawer(props) {
                 </AccordionDetails>
             </Accordion>
             <Divider/>
-            <ListItem key="alert" disablePadding>
+            <ListItem key="alerts" disablePadding>
               <ListItemButton onClick={handleLayoutChange}>
                 <ListItemIcon>
                   <Notifications/>
                 </ListItemIcon>
-                <ListItemText primary="Alert"/>
+                <ListItemText primary="Alerts"/>
               </ListItemButton>
             </ListItem>
             <Divider/>

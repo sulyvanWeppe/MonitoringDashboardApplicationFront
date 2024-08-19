@@ -1,15 +1,15 @@
 import Typography from '@mui/material/Typography';
 import axios from "axios";
 import { useState, useEffect } from 'react';
-import ApiEventFilter from './ApiEventFilter';
 import ApiDataGrid from './ApiDataGrid';
+import ApiFilter from '../../../common/ApiFilter';
 
 export default function ApiEventMain() {
     /**
      * State
      */
     const [apiMetrics, setApiMetrics] = useState([]);
-    const [callerServerNameFilter,setCallerServerNameFilter] = useState([]);
+    const [hostNameFilter,setHostNameFilter] = useState([]);
     const [methodFilter,setMethodFilter] = useState([]);
     const [uriFilter,setUriFilter] = useState([]);
 
@@ -21,7 +21,7 @@ export default function ApiEventMain() {
     useEffect(() => {       
         requestInterval = setInterval(() => {
             var request = {
-                callerServerNames: callerServerNameFilter,
+                hostNames: hostNameFilter,
                 methods: methodFilter,
                 uris: uriFilter
             };
@@ -37,7 +37,7 @@ export default function ApiEventMain() {
         // Cleanup function to clear interval when component unmounts or when selectedValue changes
         return () => clearInterval(requestInterval);
 
-    }, [callerServerNameFilter,methodFilter,uriFilter])
+    }, [hostNameFilter,methodFilter,uriFilter])
 
     /**
      * Auxilary Methods
@@ -48,8 +48,8 @@ export default function ApiEventMain() {
                 {
                     id: apiMetric.metricId,
                     timestamp: apiMetric.timestamp,
-                    callerServerName: apiMetric.callerServerName,
-                    callerServerPort: apiMetric.callerServerPort,
+                    hostName: apiMetric.hostName,
+                    hostPort: apiMetric.hostPort,
                     method: apiMetric.method,
                     requestUri: apiMetric.requestUri,
                     requestPayload: apiMetric.requestPayload,
@@ -61,8 +61,8 @@ export default function ApiEventMain() {
         return [];
     }
 
-    function handleCallerServerNameFilterChange(e) {
-        setCallerServerNameFilter(e.target.value);
+    function handleHostNameFilterChange(e) {
+        setHostNameFilter(e.target.value);
     }
 
     function handleMethodFilterChange(e) {
@@ -78,7 +78,7 @@ export default function ApiEventMain() {
      */
     return (
         <>
-            <ApiEventFilter handleCallerServerNameChange={handleCallerServerNameFilterChange}
+            <ApiFilter handleHostNameFilterChange={handleHostNameFilterChange}
                 handleMethodChange={handleMethodFilterChange}
                 handleUriChange={handleUriFilterChange}/>
             <ApiDataGrid data={apiMetricsData()}/>
